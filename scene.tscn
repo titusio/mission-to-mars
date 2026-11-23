@@ -1,55 +1,21 @@
 [gd_scene format=3 uid="uid://dyvb63rah4vel"]
 
 [ext_resource type="Script" uid="uid://d4cufnlk8ielh" path="res://universe.gd" id="1_nxogm"]
-[ext_resource type="Script" uid="uid://n0pudsvtbcor" path="res://planet.gd" id="1_ulcgi"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o6o8a"]
-albedo_color = Color(0, 0.35, 0.034999967, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_0yu0y"]
-material = SubResource("StandardMaterial3D_o6o8a")
-radial_segments = 12
-rings = 12
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_0yu0y"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nxogm"]
-albedo_color = Color(0.52082205, 0.0981961, 0.084133916, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_3253y"]
-material = SubResource("StandardMaterial3D_nxogm")
-radial_segments = 12
-rings = 12
+[ext_resource type="PackedScene" uid="uid://bx6qh46nkwsf1" path="res://planets/earth.tscn" id="3_3253y"]
+[ext_resource type="PackedScene" uid="uid://bnmpkj8ot57fn" path="res://planets/mars.tscn" id="4_m7jmp"]
 
 [node name="Universe" type="Node3D" unique_id=467393949]
 script = ExtResource("1_nxogm")
-
-[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=790704043]
-mass = 100.0
-gravity_scale = 0.0
-script = ExtResource("1_ulcgi")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=485447006]
-mesh = SubResource("SphereMesh_0yu0y")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=473498558]
-shape = SubResource("SphereShape3D_0yu0y")
-
-[node name="RigidBody3D2" type="RigidBody3D" parent="." unique_id=955922438]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.363442, 0, -13.357216)
-mass = 100.0
-gravity_scale = 0.0
-script = ExtResource("1_ulcgi")
-initial_velocity = Vector3(0, 0, 5)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2" unique_id=1779517390]
-mesh = SubResource("SphereMesh_3253y")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2" unique_id=2040543439]
-shape = SubResource("SphereShape3D_0yu0y")
+gravitational_constant = 10.0
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1115201794]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 16.38666, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 53.662254, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=129007907]
-transform = Transform3D(1, 0, 0, 0, 0.39302844, 0.91952634, 0, -0.91952634, 0.39302844, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -0.30820426, 0.9513203, 0, -0.9513203, -0.30820426, 0, 0, 0)
+
+[node name="Earth" parent="." unique_id=2117535102 instance=ExtResource("3_3253y")]
+
+[node name="Mars" parent="." unique_id=1003286359 instance=ExtResource("4_m7jmp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.773666, 0, 0)
+initial_velocity = Vector3(0, 0, 5)

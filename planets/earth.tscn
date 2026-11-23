@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bx6qh46nkwsf1"]
+
+[ext_resource type="Script" uid="uid://n0pudsvtbcor" path="res://planet.gd" id="1_ajxml"]
+[ext_resource type="PackedScene" uid="uid://bfaexido8rush" path="res://planets/earth_model.tscn" id="2_ajxml"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ithks"]
+radius = 5.534949
+
+[node name="Earth" type="RigidBody3D" unique_id=2117535102]
+mass = 50.0
+gravity_scale = 0.0
+script = ExtResource("1_ajxml")
+metadata/_custom_type_script = "uid://n0pudsvtbcor"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=651322125]
+shape = SubResource("SphereShape3D_ithks")
+debug_color = Color(0, 0.5950001, 0.7, 1)
+
+[node name="EARTH" parent="." unique_id=929423932 instance=ExtResource("2_ajxml")]
