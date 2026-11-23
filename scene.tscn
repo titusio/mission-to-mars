@@ -3,19 +3,33 @@
 [ext_resource type="Script" uid="uid://d4cufnlk8ielh" path="res://universe.gd" id="1_nxogm"]
 [ext_resource type="PackedScene" uid="uid://bx6qh46nkwsf1" path="res://planets/earth.tscn" id="3_3253y"]
 [ext_resource type="PackedScene" uid="uid://bnmpkj8ot57fn" path="res://planets/mars.tscn" id="4_m7jmp"]
+[ext_resource type="Texture2D" uid="uid://cxnfbcq7fxovo" path="res://space_spheremaps/plain_starfield_1.png" id="4_u3cyc"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_r2dq8"]
+panorama = ExtResource("4_u3cyc")
+
+[sub_resource type="Sky" id="Sky_ecwsp"]
+sky_material = SubResource("PanoramaSkyMaterial_r2dq8")
+
+[sub_resource type="Environment" id="Environment_ithks"]
+background_mode = 2
+sky = SubResource("Sky_ecwsp")
 
 [node name="Universe" type="Node3D" unique_id=467393949]
 script = ExtResource("1_nxogm")
 gravitational_constant = 10.0
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1115201794]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 53.662254, 0)
+transform = Transform3D(-0.90555364, -0.18028037, 0.3840203, 0, 0.9052134, 0.42495728, -0.42423177, 0.3848216, -0.8197193, 24.531136, 27.146177, -52.363495)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=129007907]
-transform = Transform3D(1, 0, 0, 0, -0.30820426, 0.9513203, 0, -0.9513203, -0.30820426, 0, 0, 0)
+transform = Transform3D(-0.94177574, 0.22235157, -0.25222653, 0, 0.7501347, 0.66128504, 0.33624163, 0.62278223, -0.7064587, -16.108866, 42.234077, -45.119167)
 
 [node name="Earth" parent="." unique_id=2117535102 instance=ExtResource("3_3253y")]
 
 [node name="Mars" parent="." unique_id=1003286359 instance=ExtResource("4_m7jmp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.773666, 0, 0)
 initial_velocity = Vector3(0, 0, 5)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2092101680]
+environment = SubResource("Environment_ithks")
