@@ -3,12 +3,13 @@ extends RigidBody3D
 
 var universe: Universe
 
-var _current_velocity: Vector3 = Vector3.ZERO
+var current_velocity: Vector3 = Vector3.ZERO
 
 @export var initial_velocity: Vector3
+@export var line: Line3D
 
 func _ready() -> void:
-	_current_velocity = initial_velocity
+	current_velocity = initial_velocity
 
 func update_velocity(other_planets: Array[CelestrialBody], timeStep: float) -> void:
 	for other_planet in other_planets:
@@ -20,8 +21,22 @@ func update_velocity(other_planets: Array[CelestrialBody], timeStep: float) -> v
 		var force: Vector3 = (force_dir * universe.gravitational_constant * self.mass * other_planet.mass) / sqr_dst
 		var acceleration: Vector3 = force / mass;
 
-		_current_velocity += acceleration * timeStep
+		current_velocity += acceleration * timeStep
 
 
 func update_position(delta: float):
-	global_position += _current_velocity * delta
+	global_position += current_velocity * delta
+
+
+func draw_path(positions: PackedVector3Array) -> void:
+	if line == null:
+		return
+
+	if line.curve == null:
+		push_warning("Curve of line is null")
+		return
+
+	line.curve.clear_points()
+
+	for i in range(positions.size()):
+		line.curve.add_point(positions.get(i))

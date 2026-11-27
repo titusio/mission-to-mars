@@ -7,13 +7,24 @@
 radius = 0.18457031
 height = 0.8284912
 
-[node name="Rocket" type="RigidBody3D" unique_id=1478296101]
+[sub_resource type="Curve3D" id="Curve3D_gxqvl"]
+
+[sub_resource type="PlaceholderMesh" id="PlaceholderMesh_gxqvl"]
+
+[node name="Rocket" type="RigidBody3D" unique_id=1478296101 node_paths=PackedStringArray("line")]
+gravity_scale = 0.0
 script = ExtResource("1_vaqdw")
+line = NodePath("Line3D")
 
 [node name="Model" parent="." unique_id=1509133737 instance=ExtResource("2_c7012")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=414498624]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41412354, 0)
 shape = SubResource("CapsuleShape3D_ithks")
+
+[node name="Line3D" type="Line3D" parent="." unique_id=213499220]
+curve = SubResource("Curve3D_gxqvl")
+top_level = true
+mesh = SubResource("PlaceholderMesh_gxqvl")
 
 [editable path="Model"]

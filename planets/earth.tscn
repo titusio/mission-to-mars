@@ -8,9 +8,10 @@
 radius = 5.534949
 
 [node name="Earth" type="RigidBody3D" unique_id=2117535102]
-mass = 50.0
+mass = 5000.0
 gravity_scale = 0.0
 script = ExtResource("1_ajxml")
+initial_velocity = null
 metadata/_custom_type_script = "uid://n0pudsvtbcor"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=651322125]

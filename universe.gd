@@ -4,21 +4,48 @@ extends Node3D
 @export var gravitational_constant: float = 1.0
 @export var enabled: bool = true
 
-var _planets: Array[CelestrialBody] = []
+var _celestrialBodies: Array[CelestrialBody] = []
 
 func _ready() -> void:
 	for child in get_children():
 		if child is CelestrialBody:
-			_planets.append(child)
+			_celestrialBodies.append(child)
 			child.universe = self
+
+	simulate(100)
 
 
 func _physics_process(delta: float) -> void:
 	if !enabled:
 		return
 
-	for p: CelestrialBody in _planets:
-		p.update_velocity(_planets, delta)
+	for p: CelestrialBody in _celestrialBodies:
+		p.update_velocity(_celestrialBodies, delta)
 
-	for p: CelestrialBody in _planets:
+	for p: CelestrialBody in _celestrialBodies:
 		p.update_position(delta)
+
+
+func simulate(steps: int) -> void:
+	var delta: float = 0.01
+
+	var velocities: Dictionary[CelestrialBody, Vector3] = {}
+	var positions: Dictionary[CelestrialBody, PackedVector3Array] = {}
+
+	# initialize array
+	for b: CelestrialBody in _celestrialBodies:
+		positions[b] = [b.global_position]
+		velocities[b] = b.current_velocity
+
+	# simulate
+	for i in range(steps):
+		for b: CelestrialBody in _celestrialBodies:
+			b.update_velocity(_celestrialBodies, delta)
+			b.update_position(delta)
+			positions[b].append(b.global_position)
+
+	# reset
+	for b: CelestrialBody in _celestrialBodies:
+		b.global_position = positions[b].get(0)
+		b.current_velocity = velocities[b]
+		b.draw_path(positions[b])
