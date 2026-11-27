@@ -14,22 +14,41 @@ func _ready() -> void:
 func set_velocity(velocity: Vector3) -> void:
 	current_velocity = velocity
 
-func update_velocity(other_planets: Array[CelestrialBody], timeStep: float) -> void:
-	for other_planet in other_planets:
-		if other_planet == self:
-			continue
-
-		var sqr_dst: float = (other_planet.global_position - self.global_position).length_squared()
-		var force_dir: Vector3 = (other_planet.global_position - self.global_position).normalized()
-		var force: Vector3 = (force_dir * universe.gravitational_constant * self.mass * other_planet.mass) / sqr_dst
-		var acceleration: Vector3 = force / mass;
-
-		current_velocity += acceleration * timeStep
+# func update_velocity(other_planets: Array[CelestrialBody], timeStep: float) -> void:
+# 	for other_planet in other_planets:
+# 		if other_planet == self:
+# 			continue
+#
+# 		var sqr_dst: float = (other_planet.global_position - self.global_position).length_squared()
+# 		var force_dir: Vector3 = (other_planet.global_position - self.global_position).normalized()
+# 		var force: Vector3 = (force_dir * universe.gravitational_constant * self.mass * other_planet.mass) / sqr_dst
+# 		var acceleration: Vector3 = force / mass;
+#
+# 		current_velocity += acceleration * timeStep
 
 
 func update_position(delta: float):
 	global_position += current_velocity * delta
 
+func update_velocity(other_planets: Array[CelestrialBody], time_step: float) -> void:
+	for other_planet in other_planets:
+		if other_planet == self:
+			continue
+
+		var direction: Vector3 = other_planet.global_position - global_position
+		var sqr_dst: float = direction.length_squared()
+
+		if sqr_dst == 0.0:
+			continue
+
+		var acceleration: Vector3 = (
+			direction.normalized()
+			* universe.gravitational_constant
+			* other_planet.mass
+			/ sqr_dst
+		)
+
+		current_velocity += acceleration * time_step
 
 func draw_path(positions: PackedVector3Array) -> void:
 	if line == null:

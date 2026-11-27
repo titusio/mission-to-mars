@@ -26,8 +26,8 @@ func _physics_process(delta: float) -> void:
 		p.update_position(delta)
 
 
-func simulate(steps: int = 1000) -> void:
-	var delta: float = 0.001
+func simulate(steps: int = 100) -> void:
+	var delta: float = 1
 
 	var velocities: Dictionary[CelestrialBody, Vector3] = {}
 	var positions: Dictionary[CelestrialBody, PackedVector3Array] = {}
@@ -49,3 +49,7 @@ func simulate(steps: int = 1000) -> void:
 		b.global_position = positions[b].get(0)
 		b.current_velocity = velocities[b]
 		b.draw_path(positions[b])
+
+
+func set_simulation(new_state: bool) -> void:
+	enabled = new_state
