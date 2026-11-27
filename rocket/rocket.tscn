@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://b6cv0n26th24n"]
+
+[ext_resource type="Script" uid="uid://n0pudsvtbcor" path="res://celestrial_body.gd" id="1_vaqdw"]
+[ext_resource type="PackedScene" uid="uid://bi2xmmy3i3ush" path="res://rocket/Rocket.gltf" id="2_c7012"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ithks"]
+radius = 0.18457031
+height = 0.8284912
+
+[node name="Rocket" type="RigidBody3D" unique_id=1478296101]
+script = ExtResource("1_vaqdw")
+
+[node name="Model" parent="." unique_id=1509133737 instance=ExtResource("2_c7012")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=414498624]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41412354, 0)
+shape = SubResource("CapsuleShape3D_ithks")
+
+[editable path="Model"]
