@@ -26,8 +26,8 @@ func _physics_process(delta: float) -> void:
 		p.update_position(delta)
 
 
-func simulate(steps: int = 10000) -> void:
-	var delta: float = 0.01
+func simulate(steps: int = 80000) -> void:
+	var delta: float = 0.001
 
 	var simulation_start = Time.get_ticks_msec()
 	var velocities: Dictionary[CelestrialBody, Vector3] = {}
