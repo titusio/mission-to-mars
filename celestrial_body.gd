@@ -11,6 +11,9 @@ var current_velocity: Vector3 = Vector3.ZERO
 func _ready() -> void:
 	current_velocity = initial_velocity
 
+func set_velocity(velocity: Vector3) -> void:
+	current_velocity = velocity
+
 func update_velocity(other_planets: Array[CelestrialBody], timeStep: float) -> void:
 	for other_planet in other_planets:
 		if other_planet == self:

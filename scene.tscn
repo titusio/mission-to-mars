@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bx6qh46nkwsf1" path="res://planets/earth.tscn" id="3_3253y"]
 [ext_resource type="PackedScene" uid="uid://b6cv0n26th24n" path="res://rocket/rocket.tscn" id="4_m7jmp"]
 [ext_resource type="Texture2D" uid="uid://cxnfbcq7fxovo" path="res://space_spheremaps/plain_starfield_1.png" id="4_u3cyc"]
+[ext_resource type="PackedScene" uid="uid://csl73ejm5ph58" path="res://vector_input.tscn" id="5_m7jmp"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_r2dq8"]
 panorama = ExtResource("4_u3cyc")
@@ -18,9 +19,10 @@ sky = SubResource("Sky_ecwsp")
 [node name="Universe" type="Node3D" unique_id=467393949]
 script = ExtResource("1_nxogm")
 gravitational_constant = 10.0
+enabled = false
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1115201794]
-transform = Transform3D(-0.8937843, 0.16726834, -0.41613817, 0, 0.92785025, 0.372953, 0.4484971, 0.33333954, -0.829298, -10.495154, 2.4165611, -23.034132)
+transform = Transform3D(-0.81515545, 0.28872642, -0.502154, 0, 0.86691535, 0.49845538, 0.5792422, 0.40631863, -0.70667076, -27.441442, 20.255861, -40.701534)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=129007907]
 transform = Transform3D(-0.94177574, 0.22235157, -0.25222653, 0, 0.7501347, 0.66128504, 0.33624163, 0.62278223, -0.7064587, -16.108866, 42.234077, -45.119167)
@@ -32,6 +34,41 @@ initial_velocity = Vector3(0, 0, 0)
 environment = SubResource("Environment_ithks")
 
 [node name="Rocket" parent="." unique_id=1478296101 instance=ExtResource("4_m7jmp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41178, 0, -17.992887)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41178, 0, -23.2693)
 mass = 100.0
 initial_velocity = Vector3(100, 0, 0)
+
+[node name="Control" type="Control" parent="." unique_id=2022005640]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control" unique_id=2006342523]
+custom_minimum_size = Vector2(200, 400)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer" unique_id=989846733]
+layout_mode = 2
+
+[node name="Heading" type="Label" parent="Control/MarginContainer/VBoxContainer" unique_id=1003408854]
+layout_mode = 2
+text = "Control Rocket Velocity"
+
+[node name="VectorInput" parent="Control/MarginContainer/VBoxContainer" unique_id=485614752 instance=ExtResource("5_m7jmp")]
+layout_mode = 2
+
+[connection signal="on_changed" from="Control/MarginContainer/VBoxContainer/VectorInput" to="Rocket" method="set_velocity"]
+[connection signal="on_changed" from="Control/MarginContainer/VBoxContainer/VectorInput" to="." method="simulate" unbinds=1]

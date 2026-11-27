@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://csl73ejm5ph58"]
+
+[ext_resource type="Script" uid="uid://frdf1abrpam3" path="res://vector_input.gd" id="1_qf3uh"]
+
+[node name="VectorInput" type="HBoxContainer" unique_id=485614752]
+custom_minimum_size = Vector2(0, 20)
+script = ExtResource("1_qf3uh")
+
+[node name="x" type="Label" parent="." unique_id=407248740]
+layout_mode = 2
+text = "x"
+
+[node name="InX" type="LineEdit" parent="." unique_id=957965076]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="y" type="Label" parent="." unique_id=328750908]
+layout_mode = 2
+text = "y"
+
+[node name="InY" type="LineEdit" parent="." unique_id=634946007]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="z" type="Label" parent="." unique_id=1756944249]
+layout_mode = 2
+text = "z"
+
+[node name="InZ" type="LineEdit" parent="." unique_id=933508592]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="." unique_id=1508559024]
+layout_mode = 2
+text = "Submit"
+
+[connection signal="text_submitted" from="InX" to="." method="x_changed"]
+[connection signal="text_submitted" from="InY" to="." method="y_changed"]
+[connection signal="text_submitted" from="InZ" to="." method="z_changed"]
+[connection signal="pressed" from="Button" to="." method="sumbit"]

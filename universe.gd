@@ -12,7 +12,7 @@ func _ready() -> void:
 			_celestrialBodies.append(child)
 			child.universe = self
 
-	simulate(100)
+	simulate()
 
 
 func _physics_process(delta: float) -> void:
@@ -26,8 +26,8 @@ func _physics_process(delta: float) -> void:
 		p.update_position(delta)
 
 
-func simulate(steps: int) -> void:
-	var delta: float = 0.01
+func simulate(steps: int = 1000) -> void:
+	var delta: float = 0.001
 
 	var velocities: Dictionary[CelestrialBody, Vector3] = {}
 	var positions: Dictionary[CelestrialBody, PackedVector3Array] = {}
