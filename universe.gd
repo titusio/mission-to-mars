@@ -2,6 +2,7 @@ class_name Universe
 extends Node3D
 
 @export var gravitational_constant: float = 1.0
+@export var enabled: bool = true
 
 var _planets: Array[CelestrialBody] = []
 
@@ -13,6 +14,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if !enabled:
+		return
+
 	for p: CelestrialBody in _planets:
 		p.update_velocity(_planets, delta)
 
