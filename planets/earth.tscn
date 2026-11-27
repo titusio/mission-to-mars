@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://bx6qh46nkwsf1"]
 
-[ext_resource type="Script" uid="uid://n0pudsvtbcor" path="res://planet.gd" id="1_ajxml"]
+[ext_resource type="Script" uid="uid://n0pudsvtbcor" path="res://celestrial_body.gd" id="1_ajxml"]
 [ext_resource type="PackedScene" uid="uid://bfaexido8rush" path="res://planets/earth_model.tscn" id="2_ajxml"]
+[ext_resource type="Script" uid="uid://b1x72krxksjv3" path="res://planet.gd" id="3_hq0fj"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ithks"]
 radius = 5.534949
@@ -17,3 +18,6 @@ shape = SubResource("SphereShape3D_ithks")
 debug_color = Color(0, 0.5950001, 0.7, 1)
 
 [node name="EARTH" parent="." unique_id=929423932 instance=ExtResource("2_ajxml")]
+script = ExtResource("3_hq0fj")
+spin = true
+spin_speed = 5.0

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bnmpkj8ot57fn"]
 
-[ext_resource type="Script" uid="uid://n0pudsvtbcor" path="res://planet.gd" id="1_0d8qf"]
+[ext_resource type="Script" uid="uid://n0pudsvtbcor" path="res://celestrial_body.gd" id="1_0d8qf"]
 [ext_resource type="PackedScene" uid="uid://bmk0kf5gmk8kg" path="res://planets/mars_model.tscn" id="2_1ksib"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ithks"]
