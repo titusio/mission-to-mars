@@ -26,9 +26,10 @@ func _physics_process(delta: float) -> void:
 		p.update_position(delta)
 
 
-func simulate(steps: int = 100) -> void:
-	var delta: float = 1
+func simulate(steps: int = 10000) -> void:
+	var delta: float = 0.01
 
+	var simulation_start = Time.get_ticks_msec()
 	var velocities: Dictionary[CelestrialBody, Vector3] = {}
 	var positions: Dictionary[CelestrialBody, PackedVector3Array] = {}
 
@@ -44,11 +45,18 @@ func simulate(steps: int = 100) -> void:
 			b.update_position(delta)
 			positions[b].append(b.global_position)
 
+	var simulation_end = Time.get_ticks_msec()
+	print("simulation took ", simulation_end - simulation_start, " milliseconds")
+
+	var draw_start = Time.get_ticks_msec()
 	# reset
 	for b: CelestrialBody in _celestrialBodies:
 		b.global_position = positions[b].get(0)
 		b.current_velocity = velocities[b]
 		b.draw_path(positions[b])
+
+	var draw_end = Time.get_ticks_msec()
+	print("drawing took ", draw_end- draw_start, " milliseconds")
 
 
 func set_simulation(new_state: bool) -> void:

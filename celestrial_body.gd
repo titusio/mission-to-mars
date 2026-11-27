@@ -34,11 +34,15 @@ func draw_path(positions: PackedVector3Array) -> void:
 	if line == null:
 		return
 
-	if line.curve == null:
-		push_warning("Curve of line is null")
-		return
+# 	if line.curve == null:
+# 		push_warning("Curve of line is null")
+# 		return
+#
+# 	line.curve.clear_points()
+	var curve: Curve3D = Curve3D.new()
 
-	line.curve.clear_points()
 
 	for i in range(positions.size()):
-		line.curve.add_point(positions.get(i))
+		curve.add_point(positions.get(i))
+
+	line.curve = curve
